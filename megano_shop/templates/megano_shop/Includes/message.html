@@ -1,0 +1,20 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if message.tags %}
+                <li>
+                    <div class="alert alert-{{ message.tags }} msg fade show" role="alert">{{ message }}</div>
+                    {% else %}
+                    <div class="alert alert-info msg fade show" role="alert">{{ message }}</div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul class="messages" style="display: none">
+        <li>
+            <div class="alert msg fade show text-center" role="alert">
+            </div>
+        </li>
+    </ul>
+{% endif %}

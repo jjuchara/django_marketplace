@@ -1,0 +1,67 @@
+{% extends 'megano_shop/order_base.html' %}
+{% load i18n %}
+
+{% block form %}
+    <script>
+        const menu = document.querySelectorAll('.NavigateProfile > ul > li')
+        menu.forEach(item => {
+            const element_url = item.children[0].href
+            const current_location = window.location.href
+            if (element_url === current_location) {
+                item.classList.add('menu-item_ACTIVE')
+            }
+        })
+    </script>
+
+    <div class="Order-block Order-block_OPEN" id="step2">
+        <header class="Section-header Section-header_sm">
+            <h2 class="Section-title">{% trans "Step 2. Delivery options" %}
+            </h2>
+        </header>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {% for radio in form.delivery_type %}
+                <div>
+                    <label class="toggle" for="{{ radio.id_for_label }}">
+                        {{ radio.tag }}
+                        <span class="toggle-box"></span>
+                        <span class="toggle-text">{{ radio.choice_label }}</span>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ form.city.id_for_label }}">{{ form.city.label }}
+            </label>
+            {{ form.city }}
+            {% if form.city.errors %}
+                {% for error in form.city.errors %}
+                    <small class="alert-danger d-block">{{ error }}</small>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ form.address.id_for_label }}">{{ form.address.label }}
+            </label>
+            {{ form.address }}
+            {% if form.address.errors %}
+                {% for error in form.address.errors %}
+                    <small class="alert-danger d-block">{{ error }}</small>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        <div class="Order-footer">
+            <button class="btn btn_success" type="submit">{% trans "Next" %}</button>
+        </div>
+    </div>
+
+{% endblock form %}
+

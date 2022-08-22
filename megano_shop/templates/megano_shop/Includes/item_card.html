@@ -1,0 +1,53 @@
+{% load static %}
+{% load card_tags %}
+
+<div class="Card">
+    {% csrf_token %}
+    <a class="Card-picture" href="{% url 'product_detail' item.pk %}">
+        <img src="{{ item.main_image.url }}"
+             alt="card.jpg"/></a>
+    <div class="Card-content">
+        <strong class="Card-title">
+            <a href="{% url 'product_detail' item.pk %}">{{ item.title }}
+            </a>
+        </strong>
+        <div class="Card-description">
+            <div class="Card-cost">
+                {% get_average_price item_id=item.id as price %}
+                <span class="Card-price">{{ price|floatformat:2 }}</span>
+            </div>
+            <div class="Card-category">{{ item.category.title }}
+            </div>
+            <div class="Card-hover">
+                <a class="Card-btn" href="#">
+                    <img src="{% static "assets/img/icons/card/bookmark.svg" %}"
+                         alt="bookmark.svg"/></a>
+                <a class="Card-btn add-to-cart" data-action="add" data-item-id="{{ item.pk }}" href="#">
+                    <img src=" {% static "assets/img/icons/card/cart.svg" %}"
+                         alt="cart.svg"/></a>
+                <a class="Card-btn compare" data-slug="{{ item.slug }}" href="#"><img
+                        src="{% static "assets/img/icons/card/change.svg" %}"
+                        alt="change.svg"/></a>
+            </div>
+        </div>
+    </div>
+    {% if item.discount %}
+        {% for discount in item.discount.all %}
+            {% if discount.is_active %}
+                <div class="Card-sale">
+                    {% if discount.amount_type == 'cashed' %}{{ discount.amount }}&#8381;
+                    {% elif discount.amount_type == 'percentage' %}
+                        {{ discount.amount }}&#x25;
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="message" style="display: none" data-item-id="{{ item.pk }}" class="alert" role="alert">
+    </div>
+</div>
+
+
+
+
+

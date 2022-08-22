@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load card_tags %}
+{% load i18n %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+    {% csrf_token %}
+
+    <div class="Section">
+        <div class="wrap">
+            <div class="Product">
+                <div class="ProductCard">
+                    {% if current_item.discount %}
+                        {% for discount in current_item.discount.all %}
+                            {% if discount.is_active %}
+                                <div class="Card-sale">
+                                    {% if discount.amount_type == 'cashed' %}{{ discount.amount }}&#8381;
+                                    {% elif discount.amount_type == 'percentage' %}
+                                        {{ discount.amount }}&#x25;
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <div class="ProductCard-look">
+                        <div class="ProductCard-photo">
+                            <img src="{{ current_item.main_image.url }}" alt="{{ item }}"/>
+                        </div>
+                        <div class="ProductCard-picts">
+                            {% for image in current_item.images.all %}
+                                <a class="ProductCard-pict ProductCard-pict_ACTIVE"
+                                   href="../../media/{{ image.image }}">
+                                    <img src="{{ image.image.url }}" alt="{{ item }}"/>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="ProductCard-desc">
+
+                        <div class="ProductCard-header">
+                            <h2 class="ProductCard-title">{{ current_item }}
+                            </h2>
+                            <div class="ProductCard-info">
+                                <div class="ProductCard-cost">
+                                    <!--                                    Цена с дисконтом-->
+                                    {% get_average_price item_id=current_item.id as price %}
+                                    <div class="ProductCard-price">{{ price|floatformat:2 }} &#8381;
+                                    </div>
+                                </div>
+                                <div class="ProductCard-compare"><a class="btn btn_default compare"
+                                                                    data-slug="{{ current_item.slug }}" href="#"><img
+                                        class="btn-icon" src="{% static 'assets/img/icons/card/change.svg' %}"
+                                        alt="change.svg"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ProductCard-text">
+                            <div>{{ current_item.description }}</div>
+                        </div>
+                        <div class="ProductCard-cart">
+                            <div class="ProductCard-cartElement ProductCard-cartElement_amount">
+                                <div class="Amount Amount_product">
+                                    <button class="Amount-remove" type="button">
+                                    </button>
+                                    <input class="Amount-input form-input" data-item-id="{{ current_item.id }}"
+                                           name="amount" type="text" value="1"/>
+                                    <button class="Amount-add" type="button">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ProductCard-cartElement"><a class="btn btn_primary add-to-cart"
+                                                                    data-action="add"
+                                                                    data-item-id="{{ current_item.pk }}" href="#"><img
+                                    class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}"
+                                    alt="cart_white.svg"/><span class="btn-content">Add To Cart</span></a>
+                            </div>
+                        </div>
+                        <div class="ProductCard-footer">
+                            <div class="ProductCard-tags">
+                                <strong class="ProductCard-tagsTitle">{% trans 'Tags' %}:</strong>
+                                {% for tag in current_item.tag.all %}
+                                    <a href="#">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Tabs Tabs_default">
+                    <div class="Tabs-links"><a class="Tabs-link_ACTIVE Tabs-link"
+                                               href="#description"><span>Описание</span></a><a class="Tabs-link"
+                                                                                               href="#sellers"><span>Продавцы</span></a><a
+                            class="Tabs-link" href="#addit"><span>AdditionaL Info</span></a><a class="Tabs-link"
+                                                                                               href="#reviews">
+                        {% if not reviews %}
+                            <span>Reviews (0)</span>
+                        {% else %}
+                            <span>Rewiews ({{ reviews_count }})</span>
+                        {% endif %}
+                    </a>
+                    </div>
+                    <div class="Tabs-wrap">
+                        <div class="Tabs-block" id="description">
+                            <h2>{{ current_item }}</h2>
+                            <p>{{ current_item.description }}</p>
+                            <img class="pict pict_right" src="../../media/{{ current_item.main_image }}"
+                                 alt="bigGoods.png"/>
+                            <div class="clearfix">
+                            </div>
+                            <div class="table">
+                                <table>
+                                    <tr>
+                                        <th>Характеристика
+                                        </th>
+                                        <th>Значение
+                                        </th>
+                                    </tr>
+                                    {% for specification in specifications_list|slice:"3" %}
+                                        {% for key, value in specification.items %}
+                                            <tr>
+                                                <td>{{ key }}
+                                                </td>
+                                                <td>{{ value }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="Tabs-block" id="sellers">
+                            <div class="Categories Categories_product">
+                                {% for stock in stocks %}
+                                    <div class="message" style="display: none" data-item-id="{{ current_item.pk }}"
+                                         class="alert"
+                                         role="alert">
+                                    </div>
+                                    <div class="Categories-row">
+                                        <div class="Categories-block Categories-block_info">
+                                            <div class="Categories-info">
+
+                                                <strong id="item-seller"><a
+                                                        href="{% url 'seller' stock.seller.username %}">{{ stock.seller.username }}</a>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="Categories-splitProps">
+                                        </div>
+                                        <div class="Categories-block Categories-price">
+                                            <strong>&#8381;{{ stock.price }}
+                                            </strong>
+
+                                        </div>
+                                        <div class="Categories-block Categories-button">
+                                            <a class="btn btn_primary add-to-cart" data-action="add"
+                                               data-seller="{{ stock.seller }}"
+                                               data-item-id="{{ stock.item.pk }}" href="#">
+                                                <img class="btn-icon"
+                                                     src="{% static 'assets/img/icons/card/cart_white.svg' %}"
+                                                     alt="cart_white.svg"/><span class="btn-content">Купить</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="Tabs-block" id="reviews">
+                            <header class="Section-header">
+                                {% if not reviews %}
+                                    <h3 class="Section-title">0 Reviews</h3>
+                                {% elif reviews_count == 1 %}
+                                    <h3 class="Section-title">{{ reviews_count }} Review</h3>
+                                {% else %}
+                                    <h3 class="Section-title">{{ reviews_count }} Reviews</h3>
+                                {% endif %}
+                            </header>
+                            {% for review in reviews %}
+                                <div class="Comments">
+                                    <div class="Comment">
+                                        <div class="Comment-column Comment-column_pict">
+                                            <div class="Comment-avatar">
+                                            </div>
+                                        </div>
+                                        <div class="Comment-column">
+                                            <header class="Comment-header">
+                                                <div>
+                                                    <strong class="Comment-title">{{ review.user.first_name }} {{ review.user.last_name }}
+                                                    </strong><span class="Comment-date">{{ review.created_on }}</span>
+                                                </div>
+                                            </header>
+                                            <div class="Comment-content">{{ review.content }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            {% if reviews|length != reviews_count %}
+                                <form class="form" method='get'>
+                                    <input type="hidden" name="show_more" value="1">
+                                    <button class='btn btn_muted' type="submit">{% trans 'Show more' %}</button>
+                                </form>
+                            {% endif %}
+
+                            <header class="Section-header Section-header_product">
+                                <h3 class="Section-title">Add Review
+                                </h3>
+                            </header>
+                            <div class="Tabs-addComment">
+                                <form class="form" action="" method="post">{% csrf_token %}
+                                    <div class="form-group">
+                                        {{ reviews_form.user.as_hidden }}
+                                        {{ reviews_form.item.as_hidden }}
+                                        {{ reviews_form.content }}
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn_muted" name="test" onclick="window.location.reload(true);" type="submit">{% trans 'Submit Review' %}
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="Tabs-block" id="addit">
+                            <div class="table">
+                                <table>
+                                    <tr>
+                                        <th>Характеристика
+                                        </th>
+                                        <th>Значение
+                                        </th>
+                                    </tr>
+                                    {% for key, value in current_item.specifications.items %}
+                                        <tr>
+                                            <td>{{ key }}
+                                            </td>
+                                            <td>{{ value }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock content %}

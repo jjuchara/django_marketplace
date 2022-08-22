@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">Megano Blog
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="index.html">home</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>Blog</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <div class="Cards Cards_blog">
+                    {% for item in sales_items_list %}
+                        {% if item.discount %}
+                            <div class="Card"><a class="Card-picture" href="../catalog/{{ item.id }}/detail"><img
+                                    src="{% static "assets/img/content/sale/product.png" %}"
+                                    alt="{{ item }}"/></a>
+                                <div class="Card-date">
+                                    <strong class="Card-date-number">{{ item.discount.starts_on.day }}
+                                    </strong><span class="Card-date-month">{{ item.discount.starts_on|date:'N' }}</span>
+                                </div>
+                                <div class="Card-date Card-date_to">
+                                    <strong class="Card-date-number">{{ item.discount.ends_on.day }}
+                                    </strong><span class="Card-date-month">{{ item.discount.ends_on|date:'N' }}</span>
+                                </div>
+                                <div class="Card-content">
+                                    <strong class="Card-title"><a href="../catalog/{{ item.id }}/detail">{{ item }}</a>
+                                    </strong>
+                                    <div class="Card-description">
+                                        {{ item.description }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Pagination">
+        <div class="Pagination-ins"><a class="Pagination-element Pagination-element_prev" href="#"><img
+                src="{% static "assets/img/icons/prevPagination.svg" %}" alt="prevPagination.svg"/></a><a
+                class="Pagination-element Pagination-element_current" href="#"><span
+                class="Pagination-text">1</span></a><a
+                class="Pagination-element" href="#"><span class="Pagination-text">2</span></a><a
+                class="Pagination-element"
+                href="#"><span
+                class="Pagination-text">3</span></a><a class="Pagination-element Pagination-element_prev" href="#"><img
+                src="{% static "assets/img/icons/nextPagination.svg" %}" alt="nextPagination.svg"/></a>
+        </div>
+    </div>
+
+{% endblock content %}

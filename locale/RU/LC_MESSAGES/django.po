@@ -1,0 +1,857 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-09 23:17+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\account\admin.py:19
+msgid "Mark as Customer"
+msgstr "Назначить покупателем"
+
+#: .\account\admin.py:20
+msgid "Mark as Seller"
+msgstr "Назначить продавцом"
+
+#: .\account\forms.py:12
+msgid "name"
+msgstr "имя"
+
+#: .\account\forms.py:14
+msgid "password"
+msgstr "пароль"
+
+#: .\account\forms.py:26
+msgid "This email is already registered"
+msgstr "Этот email уже зарегистрирован"
+
+#: .\account\models.py:12
+msgid "admin"
+msgstr "админ"
+
+#: .\account\models.py:13 .\megano_shop\forms.py:39
+msgid "seller"
+msgstr "продавец"
+
+#: .\account\models.py:14
+msgid "customer"
+msgstr "покупатель"
+
+#: .\account\models.py:29
+msgid "Role"
+msgstr "Роль"
+
+#: .\account\models.py:31
+msgid "avatar"
+msgstr "аватар"
+
+#: .\account\models.py:32
+msgid "Name"
+msgstr "Наименование"
+
+#: .\account\models.py:33
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\account\models.py:34
+msgid "First name"
+msgstr "Имя"
+
+#: .\account\models.py:35
+msgid "Third name"
+msgstr "Отчество"
+
+#: .\account\models.py:36 .\megano_shop\forms.py:128
+msgid "City"
+msgstr "Город"
+
+#: .\account\models.py:37 .\megano_shop\forms.py:130
+msgid "Address"
+msgstr "Адрес"
+
+#: .\account\models.py:38 .\account\templates\account\profile.html:67
+#: .\megano_shop\forms.py:56
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: .\account\models.py:41 .\account\templates\account\profile.html:13
+#: .\account\templates\account\profile.html:18 .\templates\footer.html:22
+#: .\templates\navigation.html:16
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\account\models.py:42
+msgid "Profiles"
+msgstr "Профили"
+
+#: .\account\templates\account\account.html:7
+#: .\account\templates\account\account.html:15
+#: .\account\templates\account\account.html:19 .\templates\navigation.html:13
+msgid "Account"
+msgstr "Учётная запись"
+
+#: .\account\templates\account\account.html:17
+#: .\account\templates\account\profile.html:16
+#: .\cart\templates\cart\summary.html:16 .\templates\historyorder.html:16
+#: .\templates\historyview.html:18
+msgid "Home"
+msgstr "Домой"
+
+#: .\account\templates\account\account.html:58
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: .\account\templates\account\account.html:77 .\megano_shop\models.py:281
+#: .\megano_shop\models.py:286 .\templates\historyorder.html:36
+msgid "Order"
+msgstr "Заказ"
+
+#: .\account\templates\account\account.html:80 .\templates\historyorder.html:13
+#: .\templates\historyorder.html:18 .\templates\navigation.html:19
+msgid "Orders history"
+msgstr "История заказов"
+
+#: .\account\templates\account\account.html:85 .\templates\historyorder.html:42
+msgid "Shipping type"
+msgstr "Способ доставки"
+
+#: .\account\templates\account\account.html:91 .\megano_shop\forms.py:142
+#: .\megano_shop\models.py:254 .\templates\historyorder.html:48
+msgid "Payment method"
+msgstr "Способ оплаты"
+
+#: .\account\templates\account\account.html:97 .\templates\historyorder.html:54
+msgid "Total price"
+msgstr "Общая сумма"
+
+#: .\account\templates\account\account.html:103 .\megano_shop\models.py:260
+#: .\templates\historyorder.html:62
+msgid "Order status"
+msgstr "Статус заказа"
+
+#: .\account\templates\account\account.html:119
+msgid "Views history"
+msgstr "История просмотров"
+
+#: .\account\templates\account\account.html:164
+msgid "Go to full list"
+msgstr "К полному списку"
+
+#: .\account\templates\account\profile.html:36
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\account\templates\account\profile.html:60
+msgid "Full name"
+msgstr "Полное имя"
+
+#: .\account\templates\account\profile.html:84 .\megano_shop\forms.py:67
+msgid "Password"
+msgstr "Пароль"
+
+#: .\account\templates\account\profile.html:96
+msgid "Confirm password"
+msgstr "Подтверждения пароля"
+
+#: .\account\templates\account\profile.html:102
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\cart\cart.py:47 .\cart\cart.py:66
+msgid "Item {} is added to cart"
+msgstr "Товар {} добавлен в корзину"
+
+#: .\cart\cart.py:49 .\cart\cart.py:64 .\cart\cart.py:88
+msgid "Not enough goods in stock!"
+msgstr "Недостаточно товаров на складе!"
+
+#: .\cart\cart.py:160
+msgid "Not enough goods in stock, available qty is {}"
+msgstr "Недостаточно товаров на складе, доступное количество {}"
+
+#: .\cart\templates\cart\summary.html:13 .\cart\templates\cart\summary.html:18
+msgid "Cart"
+msgstr "Корзина"
+
+#: .\cart\templates\cart\summary.html:29
+msgid "The cart is empty"
+msgstr "Корзина пуста"
+
+#: .\cart\templates\cart\summary.html:113
+msgid "Confirm order"
+msgstr "Подтвердить заказ"
+
+#: .\megano_shop\admin.py:16 .\megano_shop\models.py:89
+#: .\megano_shop\models.py:135 .\megano_shop\models.py:209
+#: .\megano_shop\models.py:289 .\megano_shop\models.py:307
+msgid "Item"
+msgstr "Товар"
+
+#: .\megano_shop\admin.py:17 .\megano_shop\models.py:90
+msgid "Items"
+msgstr "Товары"
+
+#: .\megano_shop\admin.py:23 .\megano_shop\models.py:16
+#: .\megano_shop\models.py:35 .\megano_shop\models.py:76
+msgid "Category"
+msgstr "Категория"
+
+#: .\megano_shop\admin.py:24 .\megano_shop\models.py:36
+msgid "Categories"
+msgstr "Категории"
+
+#: .\megano_shop\admin.py:81
+msgid "Mark as active"
+msgstr "Отметить как активный"
+
+#: .\megano_shop\admin.py:82
+msgid "Mark as inactive"
+msgstr "Отметить как неактивный"
+
+#: .\megano_shop\forms.py:26
+msgid "Cheap first"
+msgstr "Сначала дешёвые"
+
+#: .\megano_shop\forms.py:27
+msgid "Expensive first"
+msgstr "Сначала дорогие"
+
+#: .\megano_shop\forms.py:28
+msgid "Popular first"
+msgstr "Сначала популярные"
+
+#: .\megano_shop\forms.py:29
+msgid "Not popular first"
+msgstr "Сначала непопулярные"
+
+#: .\megano_shop\forms.py:30
+msgid "New first"
+msgstr "Сначала новые"
+
+#: .\megano_shop\forms.py:31
+msgid "Old first"
+msgstr "Сначала старые"
+
+#: .\megano_shop\forms.py:34
+msgid "price min"
+msgstr "минимальная цена"
+
+#: .\megano_shop\forms.py:35
+msgid "price max"
+msgstr "максимальная цена"
+
+#: .\megano_shop\forms.py:36
+msgid "title"
+msgstr "заголовок"
+
+#: .\megano_shop\forms.py:43
+msgid "manufacturer"
+msgstr "производитель"
+
+#: .\megano_shop\forms.py:46
+msgid "available"
+msgstr "в наличии"
+
+#: .\megano_shop\forms.py:49
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#: .\megano_shop\forms.py:53
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: .\megano_shop\forms.py:60 .\megano_shop\forms.py:66
+#: .\megano_shop\forms.py:73 .\megano_shop\forms.py:101
+#: .\megano_shop\forms.py:109 .\megano_shop\forms.py:117
+#: .\megano_shop\forms.py:128 .\megano_shop\forms.py:130
+msgid "Field can't be blank"
+msgstr "Поле не может быть пустым"
+
+#: .\megano_shop\forms.py:61
+msgid "Enter correct -mail address"
+msgstr "Введите правильный адрес е-мейл"
+
+#: .\megano_shop\forms.py:71 .\megano_shop\forms.py:78
+msgid "Password can be changed here"
+msgstr "Здесь можно изменить пароль"
+
+#: .\megano_shop\forms.py:74
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+#: .\megano_shop\forms.py:88
+msgid "Please enter your complete name"
+msgstr "Пожалуйста, введите ваше полное имя"
+
+#: .\megano_shop\forms.py:95
+msgid "Wrong phone number format -> {}"
+msgstr "Неправильный формат номера -> {}"
+
+#: .\megano_shop\forms.py:111
+msgid "Passwords must be equal"
+msgstr "Пароли должны совпадать"
+
+#: .\megano_shop\forms.py:122 .\megano_shop\models.py:240
+msgid "Ordinary delivery"
+msgstr "Обычная доставка"
+
+#: .\megano_shop\forms.py:123 .\megano_shop\models.py:241
+msgid "Express delivery"
+msgstr "Экспресс доставка"
+
+#: .\megano_shop\forms.py:127 .\megano_shop\models.py:256
+msgid "Delivery"
+msgstr "Доставка"
+
+#: .\megano_shop\forms.py:136 .\megano_shop\models.py:245
+msgid "Online"
+msgstr "Онлайн"
+
+#: .\megano_shop\forms.py:137 .\megano_shop\models.py:246
+msgid "Online from random person's account"
+msgstr "Онлайн со случайного чужого счёта"
+
+#: .\megano_shop\models.py:23
+msgid "Parent category"
+msgstr "Родительская категория"
+
+#: .\megano_shop\models.py:26
+msgid "Is active"
+msgstr "Активный"
+
+#: .\megano_shop\models.py:27
+msgid "Icon"
+msgstr "Иконка"
+
+#: .\megano_shop\models.py:28 .\megano_shop\models.py:81
+#: .\megano_shop\models.py:156 .\megano_shop\models.py:172
+#: .\megano_shop\models.py:181 .\megano_shop\models.py:196
+#: .\megano_shop\models.py:213
+msgid "Discount"
+msgstr "Скидка"
+
+#: .\megano_shop\models.py:50 .\megano_shop\models.py:53
+#: .\megano_shop\models.py:78
+msgid "Tag"
+msgstr "Тэг"
+
+#: .\megano_shop\models.py:54
+msgid "Tags"
+msgstr "Тэги"
+
+#: .\megano_shop\models.py:61 .\megano_shop\models.py:64
+msgid "Image"
+msgstr "Изображение"
+
+#: .\megano_shop\models.py:65 .\megano_shop\models.py:82
+msgid "Images"
+msgstr "Изображения"
+
+#: .\megano_shop\models.py:77
+msgid "slug"
+msgstr "Название для ссылки (slug)"
+
+#: .\megano_shop\models.py:79 .\megano_shop\models.py:104
+#: .\megano_shop\models.py:164
+msgid "Title"
+msgstr "Заголовок"
+
+#: .\megano_shop\models.py:80
+msgid "Main image"
+msgstr "Основное изображение"
+
+#: .\megano_shop\models.py:83 .\megano_shop\models.py:105
+#: .\megano_shop\models.py:165
+msgid "Description"
+msgstr "Описание"
+
+#: .\megano_shop\models.py:84 .\megano_shop\models.py:106
+msgid "Status"
+msgstr "Статус"
+
+#: .\megano_shop\models.py:85
+msgid "Specifications"
+msgstr "Характеристики"
+
+#: .\megano_shop\models.py:86 .\megano_shop\models.py:215
+msgid "count view"
+msgstr "счётчик просмотров"
+
+#: .\megano_shop\models.py:102
+msgid "Banner image"
+msgstr "Картинка банера"
+
+#: .\megano_shop\models.py:103
+msgid "URL"
+msgstr "Ссылка"
+
+#: .\megano_shop\models.py:110
+msgid "Banners"
+msgstr "Банеры"
+
+#: .\megano_shop\models.py:122
+msgid "Creation date"
+msgstr "Дата создания"
+
+#: .\megano_shop\models.py:123
+msgid "Updating date"
+msgstr "Дата обновления"
+
+#: .\megano_shop\models.py:128 .\megano_shop\models.py:191
+msgid "User"
+msgstr "Пользователь"
+
+#: .\megano_shop\models.py:138
+msgid "Review text"
+msgstr "Текст отзыва"
+
+#: .\megano_shop\models.py:141
+msgid "Review"
+msgstr "Отзыв"
+
+#: .\megano_shop\models.py:142
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\megano_shop\models.py:148
+msgid "Guest"
+msgstr "Гость"
+
+#: .\megano_shop\models.py:155
+msgid "Promo code"
+msgstr "Промокод"
+
+#: .\megano_shop\models.py:160
+msgid "Fixed amount"
+msgstr "Денежный"
+
+#: .\megano_shop\models.py:161
+msgid "Percentage"
+msgstr "Процентный"
+
+#: .\megano_shop\models.py:166
+msgid "Promo image"
+msgstr "Промо картинка"
+
+#: .\megano_shop\models.py:168
+msgid "Discount weight"
+msgstr "Вес скидки"
+
+#: .\megano_shop\models.py:169
+msgid "Discount type"
+msgstr "Тип скидки"
+
+#: .\megano_shop\models.py:171
+msgid "Amount type"
+msgstr "Тип суммы"
+
+#: .\megano_shop\models.py:173
+msgid "Promo code text"
+msgstr "Текст промокода"
+
+#: .\megano_shop\models.py:176
+msgid "Starts on"
+msgstr "Начинается"
+
+#: .\megano_shop\models.py:177
+msgid "Ends on"
+msgstr "Заканчивается"
+
+#: .\megano_shop\models.py:178
+msgid "Activity"
+msgstr "Активность"
+
+#: .\megano_shop\models.py:182 .\templates\header.html:73
+msgid "Discounts"
+msgstr "Скидки"
+
+#: .\megano_shop\models.py:202
+msgid "Applied Discount"
+msgstr "Применённая скидка"
+
+#: .\megano_shop\models.py:203
+msgid "Applied Discounts"
+msgstr "Применённые скидки"
+
+#: .\megano_shop\models.py:210
+msgid "Seller"
+msgstr "Продавец"
+
+#: .\megano_shop\models.py:211
+msgid "Quantity"
+msgstr "Количество"
+
+#: .\megano_shop\models.py:214
+#: .\megano_shop\templates\megano_shop\compare_products.html:62
+msgid "Price"
+msgstr "Цена"
+
+#: .\megano_shop\models.py:216 .\megano_shop\models.py:261
+#: .\megano_shop\models.py:304
+msgid "Created on"
+msgstr "Дата создания"
+
+#: .\megano_shop\models.py:219 .\megano_shop\models.py:288
+msgid "Stock"
+msgstr "Запас"
+
+#: .\megano_shop\models.py:220
+msgid "Stocks"
+msgstr "Запасы"
+
+#: .\megano_shop\models.py:232
+msgid "Open"
+msgstr "Открыт"
+
+#: .\megano_shop\models.py:233
+msgid "Closed"
+msgstr "Закрыт"
+
+#: .\megano_shop\models.py:236
+msgid "Payed"
+msgstr "Оплачен"
+
+#: .\megano_shop\models.py:237
+msgid "Not paid"
+msgstr "Не оплачен"
+
+#: .\megano_shop\models.py:249
+msgid "Order number"
+msgstr "Номер заказа"
+
+#: .\megano_shop\models.py:250 .\megano_shop\models.py:305
+msgid "Customer"
+msgstr "Покупатель"
+
+#: .\megano_shop\models.py:252 .\megano_shop\models.py:292
+msgid "Total amount"
+msgstr "Общая сумма"
+
+#: .\megano_shop\models.py:258
+msgid "Payment status"
+msgstr "Статус оплаты"
+
+#: .\megano_shop\models.py:262
+msgid "Updated on"
+msgstr "Дата обновления"
+
+#: .\megano_shop\models.py:282
+msgid "Orders"
+msgstr "Заказы"
+
+#: .\megano_shop\models.py:290
+msgid "Item cost"
+msgstr "Цена товара"
+
+#: .\megano_shop\models.py:291
+msgid "Items quantity"
+msgstr "Количество товаров"
+
+#: .\megano_shop\models.py:298
+msgid "Order cart"
+msgstr "Корзина заказа"
+
+#: .\megano_shop\models.py:299
+msgid "Order carts"
+msgstr "Корзины заказов"
+
+#: .\megano_shop\models.py:313
+msgid "View"
+msgstr "Просмотр"
+
+#: .\megano_shop\models.py:314
+msgid "Views"
+msgstr "Просмотры"
+
+#: .\megano_shop\services\compare.py:66
+msgid "Item {} is added to comparison"
+msgstr "Товар {} добавлен в корзину"
+
+#: .\megano_shop\services\compare.py:67
+msgid "Item {} is already in comparison set"
+msgstr "Товар {} уже в списке сравнения"
+
+#: .\megano_shop\services\discounts.py:44
+msgid "Not enough goods in cart, {} is required"
+msgstr "Недостаточно товаров в корзине, нужно {}!"
+
+#: .\megano_shop\services\discounts.py:46
+msgid "Wrong promo code"
+msgstr "Неверный промокод"
+
+#: .\megano_shop\services\discounts.py:49
+msgid "One promo code can be used in one cart"
+msgstr "Один промокод может быть использован в одной корзине"
+
+#: .\megano_shop\services\discounts.py:51
+msgid "Promo code {} has been used already"
+msgstr "Промокод {} уже использован"
+
+#: .\megano_shop\templates\megano_shop\Includes\order_progress.html:6
+msgid "Filling progress"
+msgstr "Процесс заполнения"
+
+#: .\megano_shop\templates\megano_shop\Includes\order_progress.html:12
+#: .\megano_shop\templates\megano_shop\get_user_info.html:18
+msgid "Step 1. User parameters"
+msgstr "Шаг 1. Параметры клиенты"
+
+#: .\megano_shop\templates\megano_shop\Includes\order_progress.html:14
+#: .\megano_shop\templates\megano_shop\get_delivery_info.html:18
+msgid "Step 2. Delivery options"
+msgstr "Шаг 2. Варианты доставки"
+
+#: .\megano_shop\templates\megano_shop\Includes\order_progress.html:16
+#: .\megano_shop\templates\megano_shop\get_payment_type_info.html:18
+msgid "Step 3. Payment method"
+msgstr "Шаг 3. Способ оплаты"
+
+#: .\megano_shop\templates\megano_shop\Includes\order_progress.html:18
+#: .\megano_shop\templates\megano_shop\submit_order.html:18
+msgid "Step 4. Order confirmation"
+msgstr "Шаг 4. Подтверждение заказа"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:15
+msgid "Catalog Megano"
+msgstr "Каталог Megano"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:20
+msgid "Catalog"
+msgstr "Каталог"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:31
+#: .\megano_shop\templates\megano_shop\catalog.html:38
+msgid "Filter"
+msgstr "Фильтр"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:44
+msgid "Popular tags"
+msgstr "Популярные тэги"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:48
+#: .\megano_shop\templates\megano_shop\catalog.html:54
+msgid "Video"
+msgstr "Видео"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:49
+#: .\megano_shop\templates\megano_shop\catalog.html:53
+msgid "Development"
+msgstr "Развитие"
+
+#: .\megano_shop\templates\megano_shop\catalog.html:51
+msgid "Gaming"
+msgstr "Игры"
+
+#: .\megano_shop\templates\megano_shop\category_list.html:11
+msgid "All categories"
+msgstr "Все категории"
+
+#: .\megano_shop\templates\megano_shop\compare.html:6
+#: .\megano_shop\templates\megano_shop\compare.html:14
+#: .\megano_shop\templates\megano_shop\compare.html:17
+msgid "Items comparison"
+msgstr "Сравнение товаров"
+
+#: .\megano_shop\templates\megano_shop\compare.html:26
+#: .\megano_shop\templates\megano_shop\compare.html:28
+msgid "insufficient data for comparison"
+msgstr "недостаточно данных для сравнения"
+
+#: .\megano_shop\templates\megano_shop\compare.html:34
+msgid "some sort of Lorem Ipsum dolores est"
+msgstr "какой-то большой расплывчатый текст"
+
+#: .\megano_shop\templates\megano_shop\compare.html:42
+msgid "Only characteristics that differ"
+msgstr "Только различающиеся характеристики"
+
+#: .\megano_shop\templates\megano_shop\get_delivery_info.html:62
+#: .\megano_shop\templates\megano_shop\get_payment_type_info.html:39
+#: .\megano_shop\templates\megano_shop\get_user_info.html:21
+msgid "Next"
+msgstr "Далее"
+
+#: .\megano_shop\templates\megano_shop\get_user_info.html:66
+msgid "I'm already registered"
+msgstr "Я уже зарегистрирован"
+
+#: .\megano_shop\templates\megano_shop\order_base.html:5
+msgid "Order placing"
+msgstr "Размещение заказа"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:34
+msgid "Phone number:"
+msgstr "Номер телефона:"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:40
+msgid "E-mail:"
+msgstr "Адрес E-mail:"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:48
+msgid "Delivery option:"
+msgstr "Вариант доставки: "
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:54
+msgid "City:"
+msgstr "Город:"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:60
+msgid "Address:"
+msgstr "Адрес: "
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:66
+msgid "Payment:"
+msgstr "Оплата:"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:95
+msgid "pcs"
+msgstr "шт."
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:102
+msgid "Total:"
+msgstr "Всего:"
+
+#: .\megano_shop\templates\megano_shop\submit_order.html:108
+msgid "Pay"
+msgstr "Оплатить"
+
+#: .\megano_shop\utils\filter_utils.py:47
+msgid "yes"
+msgstr "да"
+
+#: .\megano_shop\utils\filter_utils.py:48
+msgid "no"
+msgstr "нет"
+
+#: .\megano_shop\utils\filter_utils.py:49
+msgid "no matter"
+msgstr "неважно"
+
+#: .\megano_shop\utils\order_utils.py:7
+msgid "Wrong number format"
+msgstr "Неправильный формат номера"
+
+#: .\payment\forms.py:6
+msgid "Account number"
+msgstr "Номер учётной записи"
+
+#: .\payment\forms.py:7 .\payment\forms.py:13
+msgid "Field can not be empty"
+msgstr "Поле не может быть пустым"
+
+#: .\payment\forms.py:12
+msgid "Card number"
+msgstr "Номер карты"
+
+#: .\templates\footer.html:13 .\templates\navigation.html:7
+msgid "Navigation"
+msgstr "Навигация"
+
+#: .\templates\footer.html:16 .\templates\header.html:71
+msgid "Main"
+msgstr "Главная"
+
+#: .\templates\footer.html:18 .\templates\header.html:74
+msgid "Catalogue"
+msgstr "Каталог"
+
+#: .\templates\footer.html:20 .\templates\header.html:77
+msgid "Comparison"
+msgstr "Сравнение"
+
+#: .\templates\footer.html:28
+msgid "Contacts"
+msgstr "Контакты"
+
+#: .\templates\footer.html:30
+msgid "Phone:"
+msgstr "Телефон:"
+
+#: .\templates\footer.html:30
+msgid "Email:"
+msgstr "Адрес E-mail"
+
+#: .\templates\header.html:34
+msgid "Logout"
+msgstr "Выход"
+
+#: .\templates\header.html:36
+msgid "Login"
+msgstr "Вход"
+
+#: .\templates\header.html:37
+msgid "Registration"
+msgstr "Регистрация"
+
+#: .\templates\header.html:53
+msgid "GO"
+msgstr "ОК"
+
+#: .\templates\header.html:80
+msgid "Sales"
+msgstr "Акции"
+
+#: .\templates\header.html:113
+msgid "Show navigation"
+msgstr "Показать навигацию"
+
+#: .\templates\header.html:128
+msgid "What are you looking for ..."
+msgstr "Что вы ищете..."
+
+#: .\templates\header.html:130
+msgid "Search"
+msgstr "Поиск"
+
+#: .\templates\historyview.html:15 .\templates\historyview.html:20
+#: .\templates\navigation.html:22
+msgid "Watchlist"
+msgstr "Список слежения"
+
+#: .\templates\index.html:6
+msgid "Main Page"
+msgstr "Главная страница"
+
+#: .\templates\index.html:22
+msgid "Get Started"
+msgstr "Начать"
+
+#: .\templates\index.html:73
+msgid "Limited offers"
+msgstr "Ограниченные предложения"
+
+#: .\templates\index.html:105
+msgid "days"
+msgstr "дней"
+
+#: .\templates\index.html:111
+msgid "hours"
+msgstr "часов"
+
+#: .\templates\index.html:117
+msgid "mins"
+msgstr "минут"
+
+#: .\templates\index.html:123
+msgid "secs"
+msgstr "секунд"
+
+#: .\templates\index.html:134
+msgid "Popular Products"
+msgstr "Популярные товары"
+
+#: .\templates\index.html:195
+msgid "Limited edition"
+msgstr "Ограниченное издание"

@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load card_tags %}
+{% load i18n %}
+
+{% block title %}{% trans "Account" %}{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% trans "Account" %}</h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="{% url 'index' %}">{% trans "Home" %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% trans "Account" %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnLeft">
+            <div class="wrap">
+
+
+                {% if request.user.username == seller.username or not seller %}
+                    {% block navigation %}
+                        {% include 'navigation.html' %}
+                    {% endblock navigation %}
+                {% endif %}
+                <div class="Section-content">
+                    <div class="Account">
+                        <div class="Account-group">
+                            <div class="Account-column">
+
+
+                                {% if request.user.username == seller.username or not seller %}
+                                    <div class="Account-avatar"><img src="/media/{{ request.user.profile.avatar }}"
+                                                                     alt="{{ request.user }}"/>
+                                    </div>
+                                {% else %}
+                                    <div class="Account-avatar"><img src="/media/{{ seller.profile.avatar }}"
+                                                                     alt="{{ request.user }}"/>
+                                    </div>
+                                {% endif %}
+
+
+                            </div>
+                            <div class="Account-column">
+
+                                {% if request.user.username == seller.username or not seller %}
+                                    <div class="Account-name">{{ request.user.first_name }}
+                                        {{ request.user.last_name }}
+                                    </div>
+                                    <a class="Account-editLink"
+                                       href="{% url 'editing_profile' request.user.username %}">{% trans "Edit profile" %}</a>
+                                {% else %}
+                                    <div class="Account-name">{{ seller.first_name }}
+                                        {{ seller.last_name }}
+                                    </div>
+                                    <a href="tel:+7{{ seller.profile.phone_number }}">+7{{ seller.profile.phone_number }}</a>
+                                {% endif %}
+
+
+                            </div>
+                        </div>
+                        <div class="Account-group">
+                            <div class="Account-column Account-column_full">
+                                {% for order in orders %}
+                                    <div class="Order Order_anons">
+                                        <div class="Order-personal">
+                                            <div class="row_">
+                                                <div class="row-block"><a class="Order-title"
+                                                                          href="{% url 'order_detail' order.id %}">{% trans "Order" %}&#32;<span
+                                                        class="Order-numberOrder">№{{ order.order_number }}</span>&#32;от&#32;<span
+                                                        class="Order-dateOrder">{{ order.updated_at }}</span></a>
+                                                    <div class="Account-editLink"><a
+                                                            href="{% url 'orders' username=request.user %}">{% trans "Orders history" %}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row-block">
+                                                    <div class="Order-info Order-info_delivery">
+                                                        <div class="Order-infoType">{% trans "Shipping type" %}:
+                                                        </div>
+                                                        <div class="Order-infoContent">{{ order.shipping_type }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="Order-info Order-info_pay">
+                                                        <div class="Order-infoType">{% trans "Payment method" %}:
+                                                        </div>
+                                                        <div class="Order-infoContent">{{ order.payment_method }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="Order-info">
+                                                        <div class="Order-infoType">{% trans "Total price" %}:
+                                                        </div>
+                                                        <div class="Order-infoContent">{{ order.total_price }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="Order-info Order-info_status">
+                                                        <div class="Order-infoType">{% trans "Order status" %}:
+                                                        </div>
+                                                        <div class="Order-infoContent">{{ order.get_order_status_display }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if request.user.username == seller.username or not seller %}
+                            <div class="Account-group">
+                                <div class="Account-column Account-column_full">
+                                    <header class="Section-header">
+                                        <h2 class="Section-title">{% trans "Views history" %}
+                                        </h2>
+                                    </header>
+                                    <div class="Cards Cards_account">
+                                        {% for view in views %}
+                                            <div class="Card"><a class="Card-picture"
+                                                                 href="{% url 'product_detail' view.id %}"><img
+                                                    src="../../../media/{{ view.main_image }}" alt="card.jpg"/></a>
+                                                <div class="Card-content">
+                                                    <strong class="Card-title"><a
+                                                            href="{% url 'product_detail' view.id %}">{{ view }}</a>
+                                                    </strong>
+                                                    {% get_average_price item_id=view.id as price %}
+                                                    <div class="Card-description">
+                                                        <div class="Card-cost"><span class="Card-priceOld"></span><span
+                                                                class="Card-price">${{ price|floatformat:2 }}</span>
+                                                        </div>
+                                                        <div class="Card-category">{{ view.category }}
+                                                        </div>
+                                                        <div class="Card-hover"><a class="Card-btn" href="#"><img
+                                                                src="{% static 'assets/img/icons/card/bookmark.svg' %}"
+                                                                alt="bookmark.svg"/></a><a
+                                                                class="Card-btn" href="#"><img
+                                                                src="{% static 'assets/img/icons/card/cart.svg' %}"
+                                                                alt="cart.svg"/></a><a
+                                                                class="Card-btn" href="#"><img
+                                                                src="{% static 'assets/img/icons/card/change.svg' %}"
+                                                                alt="change.svg"/></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% if view.discount.all %}
+                                                    {% for discount in view.discount.all %}
+                                                        {% if discount.is_active %}
+                                                            <div class="Card-sale">
+                                                                {% if discount.amount_type == 'cashed' %}
+                                                                    -{{ discount.amount }}
+                                                                    &#8381;
+                                                                {% elif discount.amount_type == 'percentage' %}
+                                                                    -{{ discount.amount }}&#x25;
+                                                                {% endif %}
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="Account-editLink Account-editLink_view"><a
+                                            href="{% url 'views' username=request.user %}">{% trans "Go to full list" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

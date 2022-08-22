@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load compare_tags %}
+{% load i18n %}
+
+{% block title %}{% trans "Items comparison" %}{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% trans "Items comparison" %}</h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="index.html">home</a></li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current">
+                            <span>{% trans "Items comparison" %}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                {% compare_list request.session as list %}
+                {% if not list %}
+                    <h1 style="text-align: center;">{% trans "insufficient data for comparison" %}</h1>
+                {% elif  list|length < 2 %}
+                    <h1 style="text-align: center;">{% trans "insufficient data for comparison" %}</h1>
+                    {% get_compare_products request.session title_blank=True name_main=True %}
+                    {% get_compare_products request.session title_blank=True name_main=False %}
+                    {% get_compare_products request.session title_blunk=False name_main=False %}
+                {% else %}
+                    <article class="Article">
+                        <p>{% trans "some sort of Lorem Ipsum dolores est" %}</p>
+                    </article>
+                    <div class="Compare">
+                    <div class="Compare-header">
+                        {% csrf_token %}
+                        <label class="toggle Compare-checkDifferent">
+                            <input type="checkbox" name="differentFeature" value="true" checked="checked"/>
+                            <span class="toggle-box"></span>
+                            <span class="toggle-text">{% trans "Only characteristics that differ" %}</span>
+                        </label>
+
+                    </div>
+                    {% get_compare_products request.session title_blank=True name_main=True %}
+                    {% get_compare_products request.session title_blank=True name_main=False %}
+                    {% get_compare_products request.session title_blank=False name_main=False %}
+
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
