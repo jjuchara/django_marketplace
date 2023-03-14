@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Корзина{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% trans "Cart" %}
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="index.html">{% trans "Home" %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% trans "Cart" %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <form class="form Cart" action="#" method="post">
+
+                    {% if not cart.cart.items %}
+                        <h2 style="text-align: center">{% trans "The cart is empty" %}</h2>
+                    {% endif %}
+                    {% for id, item in cart.cart.items.items %}
+                        <div class="Cart-product" data-item-id="{{ id }}">
+                            <div class="Cart-block Cart-block_row">
+                                <div class="Cart-block Cart-block_pict">
+                                    <a class="Cart-pict" href="#">
+                                        <img class="Cart-img" src="{{ item.img }}"
+                                             alt="product.png"/>
+                                    </a>
+                                </div>
+                                <div class="Cart-block Cart-block_info">
+                                    <a class="Cart-title" href="#">{{ item.title }}</a>
+                                    <div class="Cart-desc">{{ item.sub_title }}</div>
+                                </div>
+                                <div class="Cart-block Cart-block_price">
+                                    {% if item.item_price.old_price > 0 %}
+                                        <div class="Cart-price Cart-price_old"
+                                             data-item-id="{{ id }}">{{ item.item_price.old_price }}&#8381;
+                                        </div>
+                                    {% endif %}
+                                    <div class="Cart-price item-price"
+                                         data-item-id="{{ id }}">{{ item.total_item_price.new_price }}&#8381;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_row">
+                                <div class="Cart-block Cart-block_seller">
+                                    <!-- - var options = setOptions(items, ['value', 'selected', 'disabled']);-->
+                                    <select class="form-select" data-item-id="{{ id }}" data-action="update">
+                                        {% for seller in item.sellers %}
+                                            <option value="{{ seller }}"
+                                                    {% if seller == item.seller %}selected="selected"{% endif %}>
+                                                {{ seller }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="Cart-block Cart-block_amount">
+                                    <div class="Cart-amount">
+                                        <div class="Amount">
+                                            <button class="Amount-remove amount-update" data-action="decrease"
+                                                    data-item-id="{{ id }}"
+                                                    type="button">
+                                            </button>
+                                            <input class="Amount-input form-input" data-item-id="{{ id }}"
+                                                   name="amount" type="text"
+                                                   value="{{ item.item_qty }}"/>
+                                            <button class="Amount-add amount-update" data-action="increase"
+                                                    data-item-id="{{ id }}" type="button">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Cart-block Cart-block_delete">
+                                    <a class="Cart-delete item-delete" data-item-id="{{ id }}"
+                                       data-action="delete" href="#">
+                                        <img src="{% static "assets/img/icons/card/delete.svg" %}" alt="delete.svg"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message" style="display: none" data-item-id="{{ id }}" class="alert"
+                             role="alert"></div>
+                    {% endfor %}
+                    <div class="Cart-total">
+                        <div class="Cart-block Cart-block_total">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <div class="message" id="cart-message" style="display: none" class="alert"
+                                     role="alert"></div>
+                                <label for="promo-code" class="form-label">Промокод</label>
+                                <input class="form-input" id="promo-code" name="promo-code" type="text" value=""
+                                       data-validate="no">
+                                <button type="button" data-action="promo" class="btn btn_sm btn_primary"
+                                        id="promo-code-apply">Применить
+                                </button>
+                            </div>
+                            <strong class="Cart-title">Итого:</strong>
+                            <span class="Cart-price cart-total-price">{{ cart.cart.total_cart_price.new_price }}&#8381;</span>
+                            {#                            {% if cart.cart.total_cart_price.old_price > 0 %}#}
+                            {#                                <span class="Cart-total-price_old">{{ cart.cart.total_cart_price.old_price }}&#8381;</span>#}
+                            {#                            {% endif %}#}
+                        </div>
+                        <div class="Cart-block">
+                            <a class="btn btn_success btn_lg" id="cart-checkout"
+                               href="{% url 'get_user_info' %}">{% trans "Confirm order" %}</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

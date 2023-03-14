@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  app_db:
+    image: postgres:13.0-alpine
+    container_name: app_db
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+  redis:
+    image: redis:7.0.5-alpine
+    expose:
+      - 6379
+  app_django:
+    container_name: app_django
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    command: gunicorn python_django_team17.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4
+    volumes:
+      - static_data:/home/app/staticfiles
+      - media_data:/home/app/media
+    env_file:
+      - ./.env.prod
+    expose:
+      - 8000
+    depends_on:
+      - app_db
+      - redis
+  app_celery:
+    container_name: app_celery
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    command: celery -A python_django_team17 worker -l INFO --concurrency 1 -E
+    volumes:
+      - .:/home/app/
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - redis
+      - app_django
+  payment_api:
+    build: ./payment_api
+    command: uvicorn payment_api.app:app --host 0.0.0.0 --port 8010 --reload
+    volumes:
+      - .:/home/api/
+    ports:
+      - "8010:8010"
+    image: payment_api:fastAPI
+    container_name: payment_api
+  nginx:
+    container_name: app_nginx
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app_django
+    volumes:
+      - static_data:/home/app/staticfiles
+      - media_data:/home/app/media
+    restart: always
+volumes:
+  postgres_data:
+  static_data:
+  media_data:

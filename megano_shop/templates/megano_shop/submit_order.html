@@ -1,0 +1,119 @@
+{% extends 'megano_shop/order_base.html' %}
+{% load i18n %}
+
+{% block form %}
+
+    <script>
+        const menu = document.querySelectorAll('.NavigateProfile > ul > li')
+        menu.forEach(item => {
+            const element_url = item.children[0].href
+            const current_location = window.location.href
+            if (element_url === current_location) {
+                item.classList.add('menu-item_ACTIVE')
+            }
+        })
+    </script>
+    <div class="Order-block Order-block_OPEN">
+        <header class="Section-header Section-header_sm">
+            <h2 class="Section-title">{% trans "Step 4. Order confirmation" %}</h2>
+        </header>
+        <!--+div.Order.-confirmation-->
+        {% for order in orders %}
+
+            <div class="Order-infoBlock">
+                <div class="Order-personal">
+                    <div class="row_">
+                        <div class="row-block">
+                            <div class="Order-info">
+                                <div class="Order-infoType">ФИО:
+                                </div>
+                                <div class="Order-infoContent">{{ order.buyer.profile.last_name }} {{ order.buyer.profile.first_name }} {{ order.buyer.profile.third_name }}
+                                </div>
+                            </div>
+                            <div class="Order-info">
+                                <div class="Order-infoType">{% trans "Phone number:" %}
+                                </div>
+                                <div class="Order-infoContent">+7{{ order.buyer.profile.phone_number }}
+                                </div>
+                            </div>
+                            <div class="Order-info">
+                                <div class="Order-infoType">{% trans "E-mail:" %}
+                                </div>
+                                <div class="Order-infoContent">{{ order.buyer.email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-block">
+                            <div class="Order-info Order-info_delivery">
+                                <div class="Order-infoType">{% trans "Delivery option:" %}
+                                </div>
+                                <div class="Order-infoContent">{{ order.get_shipping_type_display }}
+                                </div>
+                            </div>
+                            <div class="Order-info">
+                                <div class="Order-infoType">{% trans "City:" %}
+                                </div>
+                                <div class="Order-infoContent">{{ order.buyer.profile.city }}
+                                </div>
+                            </div>
+                            <div class="Order-info">
+                                <div class="Order-infoType">{% trans "Address:" %}
+                                </div>
+                                <div class="Order-infoContent">{{ order.buyer.profile.address }}
+                                </div>
+                            </div>
+                            <div class="Order-info Order-info_pay">
+                                <div class="Order-infoType">{% trans "Payment:" %}
+                                </div>
+                                <div class="Order-infoContent">{{ order.get_payment_method_display }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Cart Cart_order">
+                    {% for cart_item in order.cart.all %}
+
+                        <div class="Cart-product">
+                            <div class="Cart-block Cart-block_row">
+                                <div class="Cart-block Cart-block_pict"><a class="Cart-pict" href="#"><img
+                                        class="Cart-img"
+                                        src="{{ cart_item.item.main_image.url }}"
+                                        alt="card.jpg"/></a>
+                                </div>
+                                <div class="Cart-block Cart-block_info"><a class="Cart-title"
+                                                                           href="#">{{ cart_item.item.title }}</a>
+                                    <div class="Cart-desc">{{ cart_item.item.description|truncatechars:250 }}
+                                    </div>
+                                </div>
+                                <div class="Cart-block Cart-block_price">
+                                    <div class="Cart-price">{{ cart_item.total_price }}&#8381;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_row">
+                                <div class="Cart-block Cart-block_amount">{{ cart_item.items_qty }}{% trans "pcs" %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="Cart-total">
+                        <div class="Cart-block Cart-block_total">
+                            <strong class="Cart-title">{% trans "Total:" %}
+                            </strong><span class="Cart-price">{{ order.calculate_price_with_ship }}&#8381;</span>
+                        </div>
+                        <div class="Cart-block">
+                            <a href="{% url "get_payment_data" order.order_number %}"
+                               class="btn btn_primary btn_lg"
+                               type="submit">{% trans "Pay" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+{% endblock form %}

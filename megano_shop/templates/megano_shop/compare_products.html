@@ -1,0 +1,74 @@
+{% load static %}
+{% load card_tags %}
+{% load i18n %}
+
+{% if title_blank %}
+    {% csrf_token %}
+    <div class="Compare-row">
+        <div class="Compare-title Compare-title_blank">
+        </div>
+        <div class="Compare-products">
+            {% for compare_item in compare_list %}
+                {% if name_main %}
+                    <div class="Compare-product">
+                        <div class="Compare-nameProduct Compare-nameProduct_main">{{ compare_item.title }}</div>
+                        <div class="Compare-feature"><img class="Compare-pict" src="{{ compare_item.main_image.url }}"
+                                                          alt="card.jpg"/>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="Compare-product">
+
+                        <div class="message" style="display: none; text-align: center"
+                             data-item-id="{{ compare_item.pk }}" class="alert"
+                             role="alert"></div>
+                        <div class="Compare-nameProduct">{{ compare_item.title }}
+                        </div>
+                        <div class="Compare-feature">
+                            <a class="Compare-btn add-to-cart" data-action="add" data-item-id="{{ compare_item.id }}"
+                               href="#">
+                                <img src="{% static "assets/img/icons/card/cart.svg" %}" alt="cart.svg"/>
+                            </a>
+                            <a class="Compare-btn" href="{% url 'delete_from_compare_list' compare_item.slug %}">
+                                <img src="{% static "assets/img/icons/card/delete.svg" %}" alt="delete.svg"/>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+{% else %}
+    {% if phrase %}
+        <div class="Compare-row" style="justify-content: center">
+            <h6 style="text-align: center">{{ phrase }}</h6>
+        </div>
+    {% endif %}
+    {% for spec_key,spec_value in specifications.items %}
+        <div class="Compare-row">
+            <div class="Compare-title">{{ spec_key }}</div>
+            <div class="Compare-products">
+                {% for item in spec_value %}
+                    <div class="Compare-product">
+                        <div class="Compare-nameProduct">{{ item.0 }}</div>
+
+                        <div class="Compare-feature">{{ item.1 }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="Compare-row">
+        <div class="Compare-title">{% trans "Price" %}</div>
+        <div class="Compare-products">
+            {% for compare_item in compare_list %}
+                {% get_average_price compare_item.pk as price %}
+                <div class="Compare-product">
+                    <div class="Compare-nameProduct">{{ compare_item.title }}</div>
+                    <div class="Compare-feature">{{ price|floatformat:2 }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

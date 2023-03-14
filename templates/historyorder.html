@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}Orders{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% trans "Orders history" %}
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="{% url 'index' %}">{% trans "Home" %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% trans "Orders history" %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnLeft">
+            <div class="wrap">
+                {% block navigation %}
+                    {% include 'navigation.html' %}
+                {% endblock navigation %}
+            </div>
+            <div class="Section-content">
+                <div class="Orders">
+                    {% for order in orders %}
+                        <div class="Order Order_anons">
+                            <div class="Order-personal">
+                                <div class="row_">
+                                    <div class="row-block"><a class="Order-title"
+                                                              href="/order/{{ order.id }}">{% trans "Order" %}&#32;<span
+                                            class="Order-numberOrder">№ {{ order.order_number }}</span>&#32;от&#32;<span
+                                            class="Order-dateOrder">{{ order.updated_at }}</span></a>
+                                    </div>
+                                    <div class="row-block">
+                                        <div class="Order-info Order-info_delivery">
+                                            <div class="Order-infoType">{% trans "Shipping type" %}:
+                                            </div>
+                                            <div class="Order-infoContent">{{ order.shipping_type }}
+                                            </div>
+                                        </div>
+                                        <div class="Order-info Order-info_pay">
+                                            <div class="Order-infoType">{% trans "Payment method" %}:
+                                            </div>
+                                            <div class="Order-infoContent">{{ order.payment_method }}
+                                            </div>
+                                        </div>
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% trans "Total price" %}:
+                                            </div>
+                                            <div class="Order-infoContent"><span
+                                                    class="Order-price">{{ order.calculate_price_with_ship }}</span><span
+                                                    class="Order-price_old"></span>
+                                            </div>
+                                        </div>
+                                        <div class="Order-info Order-info_status">
+                                            <div class="Order-infoType">{% trans "Order status" %}:
+                                            </div>
+                                            <div class="Order-infoContent">{{ order.get_payment_status_display }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock content %}

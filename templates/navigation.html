@@ -1,0 +1,43 @@
+{% load i18n %}
+
+{% block navigation %}
+    <div class="Section-column">
+        <div class="Section-columnSection">
+            <header class="Section-header">
+                <strong class="Section-title">{% trans "Navigation" %}</strong>
+            </header>
+            <div class="Section-columnContent">
+                <div class="NavigateProfile">
+                    <ul class="menu menu_vt">
+                        <li class="menu-item" id="account"><a class="menu-link"
+                                                              href="{% url 'account' username=request.user %}">{% trans "Account" %}</a>
+                        </li>
+                        <li class="menu-item" id="profile"><a class="menu-link"
+                                                              href="{% url 'editing_profile' username=request.user %}">{% trans "Profile" %}</a>
+                        </li>
+                        <li class="menu-item" id="orders"><a class="menu-link"
+                                                             href="{% url 'orders' username=request.user %}">{% trans "Orders history" %}</a>
+                        </li>
+                        <li class="menu-item" id="views"><a class="menu-link"
+                                                            href="{% url 'views' username=request.user %}">{% trans "Watchlist" %}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var title = document.title;
+        if (title == 'Account' || title == 'Кабинет') {
+            document.getElementById('account').classList.add("menu-item_ACTIVE");
+        } else if (title == 'Profile' || title == 'Профиль') {
+            document.getElementById('profile').classList.add("menu-item_ACTIVE");
+        } else if (title == 'Orders' || title == 'Список заказов') {
+            document.getElementById('orders').classList.add("menu-item_ACTIVE");
+        } else if (title == 'Views' || title == 'Просмотренные товары') {
+            document.getElementById('views').classList.add("menu-item_ACTIVE");
+        }
+    </script>
+
+{% endblock navigation %}

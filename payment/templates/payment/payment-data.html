@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Страница оплаты{% endblock title %}
+
+{% block content %}
+    <div class="Middle Middle_top" id="spinner" style="display: none">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">Ожидание оплаты
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="index.html">home</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>Ожидание оплаты</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <div class="ProgressPayment">
+                    <div class="ProgressPayment-title">Ждем подтверждения оплаты платежной системой
+                    </div>
+                    <div class="ProgressPayment-icon">
+                        <div class="cssload-thecube">
+                            <div class="cssload-cube cssload-c1"></div>
+                            <div class="cssload-cube cssload-c2"></div>
+                            <div class="cssload-cube cssload-c4"></div>
+                            <div class="cssload-cube cssload-c3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Middle Middle_top" id="payment">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">Оплата
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="index.html">home</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>Оплата</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <form class="form Payment" action="#" method="post" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="Payment-card">
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="alert-danger d-block">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if form_class  == 'GetAccountNumberForm' %}
+                        <div class="form-group">
+                            <button class="btn btn_success Payment-generate" type="button" href="#"
+                                    onclick="generate_random_number(8)">Сгенирировать
+                                случайный
+                                счет
+                            </button>
+                        </div>
+                    {% endif %}
+                    <div class="Payment-pay">
+                        <button class="btn btn_primary" type="submit"
+                                onclick="show_loader()">Оплатить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function generate_random_number(length) {
+            const random_number = Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1))
+            document.getElementById('id_account_number').value = random_number
+        }
+
+        function show_loader() {
+            const spinner = document.getElementById('spinner')
+            const payment = document.getElementById('payment')
+
+            payment.style.display = 'none'
+            spinner.style.display = 'block'
+        }
+
+    </script>
+{% endblock content %}

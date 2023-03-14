@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<div class="Section-column">
+    <div class="Section-columnSection">
+        <header class="Section-header">
+            <strong class="Section-title">{% trans "Filling progress" %}
+            </strong>
+        </header>
+        <div class="Section-columnContent">
+            <div class="NavigateProfile">
+                <ul class="menu menu_vt">
+                    <li class="menu-item"><a class="menu-link"
+                                             href="{% url 'get_user_info' %}">{% trans "Step 1. User parameters" %}</a>
+                    </li>
+                    <li class="menu-item"><a class="menu-link"
+                                             href="{% url 'get_delivery_info' %}">{% trans "Step 2. Delivery options" %}</a>
+                    </li>
+                    <li class="menu-item"><a class="menu-link"
+                                             href="{% url 'get_payment_type' %}">{% trans "Step 3. Payment method" %}</a>
+                    </li>
+                    <li class="menu-item"><a class="menu-link"
+                                             href="{% url 'submit_order' %}">{% trans "Step 4. Order confirmation" %}</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

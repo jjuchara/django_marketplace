@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load card_tags %}
+{% load i18n %}
+
+{% block title %}Views{% endblock title %}
+
+{% block content %}
+
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% trans "Watchlist" %}
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="{% url 'index' %}">{% trans "Home" %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% trans "Watchlist" %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnLeft">
+            <div class="wrap">
+                {% block navigation %}
+                    {% include 'navigation.html' %}
+                {% endblock navigation %}
+                <div class="Section-content">
+                    <div class="Cards">
+                        {% for view in views %}
+                            <div class="Card">
+                                <a class="Card-picture" href="{% url 'product_detail' view.id %}"><img
+                                        src="../../../media/{{ view.main_image }}"
+                                        alt="{{ view.category }}"/>
+                                </a>
+                                <div class="Card-content">
+                                    <strong class="Card-title">
+                                        <a href="{% url 'product_detail' view.id %}">
+                                            {{ view }}
+                                        </a>
+                                    </strong>
+                                    {% get_average_price item_id=view.id as price %}
+                                    <div class="Card-description">
+                                        <div class="Card-cost"><span class="Card-priceOld"></span><span
+                                                class="Card-price">${{ price|floatformat:2 }}</span>
+                                        </div>
+                                        <div class="Card-category">{{ view.category }}
+                                        </div>
+                                        <div class="Card-hover">
+                                            <a class="Card-btn" href="#">
+                                                <img src="{% static 'assets/img/icons/card/bookmark.svg' %}"
+                                                     alt="bookmark.svg"/>
+                                            </a>
+                                            <a class="Card-btn add-to-cart" data-action="add"
+                                               data-item-id="{{ view.pk }}" href="#">
+                                                <img src="{% static 'assets/img/icons/card/cart.svg' %}"
+                                                     alt="cart.svg"/>
+                                            </a>
+                                            <a class="Card-btn compare" data-slug="{{ view.slug }}" href="#">
+                                                <img
+                                                        src="{% static 'assets/img/icons/card/change.svg' %}"
+                                                        alt="change.svg"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if view.discount.all %}
+                                    {% for discount in view.discount.all %}
+                                        {% if discount.is_active %}
+                                            <div class="Card-sale">
+                                                {% if discount.amount_type == 'cashed' %}
+                                                    -{{ discount.amount }}
+                                                    &#8381;
+                                                {% elif discount.amount_type == 'percentage' %}
+                                                    -{{ discount.amount }}&#x25;
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="message" style="display: none" data-item-id="{{ view.pk }}" class="alert"
+                                     role="alert">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

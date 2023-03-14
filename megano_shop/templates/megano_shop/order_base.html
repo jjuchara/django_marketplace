@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans "Order placing" %} {% endblock title %}
+<script>
+    const menu = document.querySelectorAll('.NavigateProfile > ul > li')
+    menu.forEach(item => {
+        const element_url = item.children[0].href
+        const current_location = window.location.href
+        if (element_url === current_location) {
+            item.classList.add('menu-item_ACTIVE')
+        }
+    })
+</script>
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Section Section_column Section_columnRight Section_columnWide Order">
+            <div class="wrap">
+                {% include 'megano_shop/Includes/order_progress.html' %}
+                <div class="Section-content">
+                    <form class="form" action="#" data-name="user" method="post" novalidate>
+                        {% csrf_token %}
+                        {% block form %}
+
+                        {% endblock form %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

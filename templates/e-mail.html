@@ -1,0 +1,42 @@
+{% extends 'base_form.html' %}
+
+{% block title %}Password recovery{% endblock title %}
+{% load static %}
+{% block content %}
+    <div class="wrap">
+        <div class="row_ Header-rowMain">
+            <div class="row-block Header-logo"><a class="logo" href="index.html"><img class="logo-image"
+                                                                                      src={% static "assets/img/logo.png" %} alt="logo.png"/></a>
+            </div>
+        </div>
+
+
+        <div class="wrapper">
+            <div class="header">
+                <h3 class="sign-in">Восстановление пароля (1/2)</h3>
+                <h5>Для восстановления пароля введите адрес электронной почты, на которую зарегистрирована учетная
+                    запись</h5>
+            </div>
+
+            {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <input type="submit" value="Получить проверочный код"/>
+                </div>
+                <a class="registr" href="{% url 'login' %}">
+                    Вход
+                </a>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock content %}

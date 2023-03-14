@@ -1,0 +1,73 @@
+{% extends 'megano_shop/order_base.html' %}
+{% load i18n %}
+
+{% block form %}
+    <script>
+        const menu = document.querySelectorAll('.NavigateProfile > ul > li')
+        menu.forEach(item => {
+            const element_url = item.children[0].href
+            const current_location = window.location.href
+            if (element_url === current_location) {
+                item.classList.add('menu-item_ACTIVE')
+            }
+        })
+    </script>
+
+    <div class="Order-block Order-block_OPEN" id="step1">
+        <header class="Section-header Section-header_sm">
+            <h2 class="Section-title">{% trans "Step 1. User parameters" %}</h2>
+        </header>
+        <div class="Order-footer">
+            <button class="btn btn_success btn_user" type="submit">{% trans "Next" %}</button>
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="row_">
+            <div class="row-block">
+                {% for field in form.visible_fields %}
+                    {% if field.name in 'full_name, phone_number, email' %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.help_text }}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <small class="alert-danger d-block">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if not user.is_authenticated %}
+                <div class="row-block">
+                    {% for field in form.visible_fields %}
+                        {% if field.name in 'password1, password2' %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="alert-danger d-block">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="form-group">
+                        <a class="btn btn_muted Order-btnReg"
+                           href="{% url 'login' %}">{% trans "I'm already registered" %}</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock form %}

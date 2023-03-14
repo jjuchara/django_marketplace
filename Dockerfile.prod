@@ -1,0 +1,45 @@
+FROM python:3.10-alpine
+
+
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# create the app user
+RUN addgroup -S app && adduser -S app -G app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app
+ENV PATH="/scripts:${PATH}"
+WORKDIR $APP_HOME
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+RUN mkdir -p $APP_HOME/staticfiles
+
+# install psycopg2 dependencies
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev vim
+
+
+# install dependencies
+COPY poetry.lock pyproject.toml ./
+RUN pip install --upgrade pip
+RUN pip3 install poetry
+RUN poetry config virtualenvs.create false
+RUN poetry install -n --no-ansi
+RUN poetry add psycopg2-binary
+
+# copy entrypoint.sh
+COPY ./scripts ./scripts
+
+RUN sed -i 's/\r$//g' $APP_HOME/scripts/entrypoint.sh
+RUN chmod +x $APP_HOME/scripts/*
+
+COPY . $APP_HOME
+
+RUN chown -R app:app $APP_HOME
+
+USER app
+
+ENTRYPOINT ["/home/app/scripts/entrypoint.sh"]
